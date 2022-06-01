@@ -33,13 +33,14 @@ helm install pythonapp ./helmTask
 ```sh
 kubectl get all
 ```
-![Build Status](https://github.com/moutazmuhammad/AWS-Terraform-Task/blob/main/img/5.png?raw=true)
+![Build Status](https://raw.githubusercontent.com/moutazmuhammad/HelmTask/main/img/1.png?raw=true)
 
 - User This command to get [ IP:port ] to access Python App 
 > Note: IF you use minikube
 ```sh
 minikube service frontend-svc  --url
 ```
+![Build Status](https://raw.githubusercontent.com/moutazmuhammad/HelmTask/main/img/2.png?raw=true)
 
 ### Installing kube-prometheous-stack:
 - Add helm repo
@@ -59,19 +60,19 @@ kubectl get svc
 kubectl port-forward svc/prometheus-prometheus-node-exporter 9100
 ```
 In your browser: 127.0.0.1:9100
-![Build Status](https://github.com/moutazmuhammad/AWS-Terraform-Task/blob/main/img/5.png?raw=true)
+![Build Status](https://raw.githubusercontent.com/moutazmuhammad/HelmTask/main/img/3.png?raw=true)
 - To Monitor Prometheus itself:
 ```sh
 kubectl port-forward svc/prometheus-operated 9090
 ```
 In your browser: 127.0.0.1:9090
-![Build Status](https://github.com/moutazmuhammad/AWS-Terraform-Task/blob/main/img/5.png?raw=true)
+![Build Status](https://raw.githubusercontent.com/moutazmuhammad/HelmTask/main/img/4.png?raw=true)
 - Grafana
 ```sh
 kubectl port-forward deployment/prometheus-grafana 3000
 ```
 In your browser: 127.0.0.1:3000
 > Note: grafana-username: admin , grafana-password: prom-operator
-![Build Status](https://github.com/moutazmuhammad/AWS-Terraform-Task/blob/main/img/5.png?raw=true)
+![Build Status](https://raw.githubusercontent.com/moutazmuhammad/HelmTask/main/img/5.png?raw=true)
 
 
