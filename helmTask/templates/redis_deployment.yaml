@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Values.databasedeployment.name}}
+  labels:
+    app: {{.Values.databasedeployment.label}}
+spec:
+  replicas: {{.Values.replicaCount}}
+  selector:
+    matchLabels:
+      app: {{.Values.databasedeployment.label}}
+  template:
+    metadata:
+      labels:
+        app: {{.Values.databasedeployment.label}}
+    spec:
+      containers:
+      - name: {{.Values.databasedeployment.containers.name}}
+        image: {{.Values.databasedeployment.containers.image}}
+        ports:
+        - containerPort: {{.Values.REDIS_PORT}}

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{.Values.backservice.name}}
+spec:
+  selector:
+    app: {{.Values.backservice.selector}}
+  type: {{.Values.backservice.type}}
+  ports:
+    - port: {{.Values.REDIS_PORT}}
+      targetPort: {{.Values.REDIS_PORT}}
+      protocol: TCP
