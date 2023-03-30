@@ -1,0 +1,70 @@
+# Python App
+app_replicas: 1
+
+app_spec:
+  selector:
+    matchLabels:
+      app: front-app
+
+  template:
+    metadata:
+      labels:
+        app: front-app
+
+app_container:
+  name: python-ctr
+  image: moutazmuhammad/python-app:latest
+  port: 8000
+  env:
+    ENVIRONMENT: DEV
+    HOST: localhost
+    PORT: 8000
+    REDIS_HOST: backend-scv.default.svc.cluster.local  
+    REDIS_PORT: 6379
+    REDIS_DB: 0
+
+
+# Redis DB
+db_replicas: 1
+
+db_spec:
+  selector:
+    matchLabels:
+      app: backend
+
+  template:
+    metadata:
+      labels:
+        app: backend
+
+db_container:
+  name: redis-ctr
+  image: redis
+  port: 6379
+
+
+# SVC
+
+svc_metadata:
+  frontend_name: frontend-svc
+  backend_name: backend-svc
+
+svc_type:
+  frontend_type: NodePort
+  backend_type: ClusterIP
+
+svc_selector:
+  frontend:
+    app: front-app
+
+  backend:
+    app: backend
+
+svc_port:
+  frontend:
+    port: 8000
+    targetPort: 8000
+    nodePort: 30008
+  backend:
+    port: 6379
+    targetPort: 6379

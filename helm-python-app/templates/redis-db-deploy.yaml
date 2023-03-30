@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-db-deploy
+spec:
+  replicas: {{ .Values.db_replicas }}
+  selector:
+    matchLabels:
+      {{- range $k, $v := .Values.db_spec.selector.matchLabels }}
+      {{ $k }}: {{ $v }}
+      {{- end }}
+  template:
+    metadata:
+      labels:
+        {{- range $k, $v := .Values.db_spec.template.metadata.labels }}
+        {{ $k }}: {{ $v }}
+        {{- end }}
+    spec:
+      containers:
+      - name: {{ .Values.db_container.name }}
+        image: {{ .Values.db_container.image }}
+        ports:
+        - containerPort: {{ .Values.db_container.port }}
